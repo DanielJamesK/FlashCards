@@ -43,7 +43,6 @@ iframe {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  border-radius: 10px;
 }
 
 .container-left {
@@ -71,7 +70,7 @@ iframe {
 }
 
 .card {
-  margin: 100px auto 0;
+  /* margin: 100px auto 0; */
   width: 400px;
   height: 500px;
   perspective: 1000px;
@@ -198,6 +197,7 @@ iframe {
 }
 
 button {
+  margin-top: 2rem;
   padding: 1rem 2rem;
   border: none;
   border-radius: 5px;
