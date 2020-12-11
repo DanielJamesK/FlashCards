@@ -1,9 +1,11 @@
-const card = document.querySelector('.card__inner')
+
 const iframe = document.querySelector('iframe')
 const btn = document.getElementById('show')
 const left = document.getElementById('c-l')
 const wholecard = document.getElementById('card')
 const qContainer = document.querySelector('.container')
+
+
 
 
 
@@ -26,6 +28,7 @@ const addFlashCard = (e) => {
   let question = {
     id: Date.now(),
     description: document.querySelector('#question').value
+
   }
   questions.push(question)
   document.querySelector('form').reset()
@@ -35,10 +38,34 @@ const addFlashCard = (e) => {
   // pre.textContent = '\n' + JSON.stringify(questions, '\t', 2)
 
   localStorage.setItem(`${question.id}`, `${question.description}`)
+  localStorage.setItem(`${answer.id}`, `${answer.description}`)
   userQuestion = localStorage.getItem('MyQuestions')
   createUserCard(localStorage.getItem(question.id))
   console.log(localStorage.getItem(question.id))
 
+  // CODE I HAD BEFORE I CTRL Z TO SHOW TED
+  // let questions = []
+  // let answers = []
+  // const addFlashCardQuestion = (e) => {
+  //   e.preventDefault()
+
+  //   let questionVal = document.querySelector('#question').value
+  //   let answerVal = document.querySelector('#answer').value
+
+  //   questions.push(questionAndAnswer.questionVal)
+  //   answers.push(questionAndAnswer.answersVal)
+  //   document.querySelector('form').reset()
+
+  //   console.warn('added', { questions })
+  //   let pre = document.querySelector('#msg pre')
+  //   // pre.textContent = '\n' + JSON.stringify(questions, '\t', 2)
+
+  //   localStorage.setItem('question', `${questionVal}`)
+  //   localStorage.setItem('answer', `${answerVal}`)
+  //   // userQuestion = localStorage.getItem('MyQuestions')
+  //   createUserCard(localStorage.getItem('question'), localStorage.getItem('answer'))
+  //   console.log('question')
+  //   console.log(question)
 }
 
 document.querySelector('#btn').addEventListener('click', addFlashCard)
@@ -66,31 +93,56 @@ function createUserCard(question) {
   // </div>`
 
   // qContainer.innerHTML = cardHTML
+
   let div = document.createElement('div');
   let text = document.createTextNode('Test');
   let divInner = document.createElement('div')
   let divInnerFace = document.createElement('div')
+  let divInnerFaceBack = document.createElement('div')
+  let divInnerFaceBackContent = document.createElement('div')
+  let divHeader = document.createElement('div')
   let divInnerFaceH3 = document.createElement('h3')
+  let divInnerFaceH3Back = document.createElement('h3')
+  let divCardBody = document.createElement('div')
   let divImg = document.createElement('img')
+  let divP = document.createElement('p')
   div.classList.add('card');
   divInnerFaceH3.classList.add('card__header')
+  divInnerFaceH3Back.classList.add('card__header')
+  divInnerFaceH3Back.classList.add('h3')
   divInner.classList.add('card__inner')
   divInnerFace.classList.add('card__face')
   divInnerFace.classList.add('card__face--front')
+  divInnerFaceBack.classList.add('card__face')
+  divInnerFaceBack.classList.add('card__face--back')
+  divInnerFaceBackContent.classList.add('card__content')
+  divHeader.classList.add('card__header')
   divImg.classList.add('pp-front')
   divImg.classList.add('pp')
+  divCardBody.classList.add('card__body')
   divImg.src = "images/html5.png"
+  divInnerFaceH3Back.textContent = "ANSWER"
+  divP.textContent = "You can add an image to your HTML markup by using the <img src='relative_path'></img> tags"
+  divInnerFaceH3.style.color = "#FFF"
   divInnerFaceH3.textContent = `${question}`
+  divCardBody.appendChild(divP)
+  divInnerFaceBackContent.appendChild(divInnerFaceH3Back)
+  divInnerFaceBackContent.appendChild(divCardBody)
+  divInnerFaceBack.appendChild(divInnerFaceBackContent)
   divInnerFace.appendChild(divImg)
   divInnerFace.appendChild(divInnerFaceH3)
   divInner.appendChild(divInnerFace)
+  divInner.appendChild(divInnerFaceBack)
   divInner.appendChild(text);
   div.appendChild(divInner);
   qContainer.appendChild(div)
 
-  div.addEventListener('click', function () {
-    divInnerFace.classList.add('is-flipped')
-  })
+  const card = document.querySelector('.card__inner')
+  const flip = function () {
+    card.classList.toggle('is-flipped')
+  }
+
+  card.addEventListener('click', flip)
 }
 
 
