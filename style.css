@@ -13,7 +13,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   height: 100vh;
-  overflow: hidden;
   background: rgb(38,38,38);
   background: linear-gradient(45deg, rgba(38,38,38,1) 0%, rgba(29,29,29,1) 100%);
 }
@@ -38,11 +37,12 @@ iframe {
 .container {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
   width: 100vw;
+  margin-top: 4rem;
 }
 
 .container-left {
@@ -75,6 +75,7 @@ iframe {
   height: 500px;
   perspective: 1000px;
   z-index: 100;
+  margin: 1rem;
 }
 
 .card__inner {
@@ -109,7 +110,7 @@ iframe {
   background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .card__face--front h3 {
@@ -153,7 +154,7 @@ iframe {
   display: block;
   width: 128px;
   height: 128px;
-  margin: 0 auto 30px;
+  margin: 30px auto 30px;
   border-radius: 50%;
   background-color: #fff;
   border: 5px solid #fff;
