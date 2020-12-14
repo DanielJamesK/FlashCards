@@ -21,56 +21,57 @@ const qContainer = document.querySelector('.container')
 //   console.log("clicked")
 // })
 
+// let questions = []
+
+// const addFlashCard = (e) => {
+//   e.preventDefault()
+//   let question = {
+//     id: Date.now(),
+//     description: document.querySelector('#question').value
+
+//   }
+//   questions.push(question)
+//   document.querySelector('form').reset()
+
+//   console.warn('added', { questions })
+//   let pre = document.querySelector('#msg pre')
+//   // pre.textContent = '\n' + JSON.stringify(questions, '\t', 2)
+
+//   localStorage.setItem(`${question.id}`, `${question.description}`)
+//   localStorage.setItem(`${answer.id}`, `${answer.description}`)
+//   userQuestion = localStorage.getItem('MyQuestions')
+//   createUserCard(localStorage.getItem(question.id))
+//   console.log(localStorage.getItem(question.id))
+
+// CODE I HAD BEFORE I CTRL Z TO SHOW TED
 let questions = []
-
-const addFlashCard = (e) => {
+let answers = []
+const addFlashCardQuestion = (e) => {
   e.preventDefault()
-  let question = {
-    id: Date.now(),
-    description: document.querySelector('#question').value
 
-  }
-  questions.push(question)
+  let questionVal = document.querySelector('#question').value
+  let answerVal = document.querySelector('#answer').value
+
+  questions.push(questionVal)
+  answers.push(answerVal)
   document.querySelector('form').reset()
 
   console.warn('added', { questions })
+  console.warn('added', { answers })
   let pre = document.querySelector('#msg pre')
   // pre.textContent = '\n' + JSON.stringify(questions, '\t', 2)
 
-  localStorage.setItem(`${question.id}`, `${question.description}`)
-  localStorage.setItem(`${answer.id}`, `${answer.description}`)
-  userQuestion = localStorage.getItem('MyQuestions')
-  createUserCard(localStorage.getItem(question.id))
-  console.log(localStorage.getItem(question.id))
-
-  // CODE I HAD BEFORE I CTRL Z TO SHOW TED
-  // let questions = []
-  // let answers = []
-  // const addFlashCardQuestion = (e) => {
-  //   e.preventDefault()
-
-  //   let questionVal = document.querySelector('#question').value
-  //   let answerVal = document.querySelector('#answer').value
-
-  //   questions.push(questionAndAnswer.questionVal)
-  //   answers.push(questionAndAnswer.answersVal)
-  //   document.querySelector('form').reset()
-
-  //   console.warn('added', { questions })
-  //   let pre = document.querySelector('#msg pre')
-  //   // pre.textContent = '\n' + JSON.stringify(questions, '\t', 2)
-
-  //   localStorage.setItem('question', `${questionVal}`)
-  //   localStorage.setItem('answer', `${answerVal}`)
-  //   // userQuestion = localStorage.getItem('MyQuestions')
-  //   createUserCard(localStorage.getItem('question'), localStorage.getItem('answer'))
-  //   console.log('question')
-  //   console.log(question)
+  localStorage.setItem('question', `${questionVal}`)
+  localStorage.setItem('answer', `${answerVal}`)
+  // userQuestion = localStorage.getItem('MyQuestions')
+  createUserCard(localStorage.getItem('question'), localStorage.getItem('answer'))
+  console.log('question')
+  console.log(question)
 }
 
-document.querySelector('#btn').addEventListener('click', addFlashCard)
+document.querySelector('#btn').addEventListener('click', addFlashCardQuestion)
 
-function createUserCard(question) {
+function createUserCard(question, answer) {
   // const cardHTML = ` 
   // <div class="card">
   //   <div class="card__inner">
@@ -122,7 +123,7 @@ function createUserCard(question) {
   divCardBody.classList.add('card__body')
   divImg.src = "images/html5.png"
   divInnerFaceH3Back.textContent = "ANSWER"
-  divP.textContent = "You can add an image to your HTML markup by using the <img src='relative_path'></img> tags"
+  divP.textContent = `${answer}`
   divInnerFaceH3.style.color = "#FFF"
   divInnerFaceH3.textContent = `${question}`
   divCardBody.appendChild(divP)
@@ -137,12 +138,11 @@ function createUserCard(question) {
   div.appendChild(divInner);
   qContainer.appendChild(div)
 
-  const card = document.querySelector('.card__inner')
-  const flip = function () {
-    card.classList.toggle('is-flipped')
-  }
 
-  card.addEventListener('click', flip)
+  const flip = function () {
+    divInner.classList.toggle('is-flipped')
+  }
+  divInner.addEventListener('click', flip)
 }
 
 
